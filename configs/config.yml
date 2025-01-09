@@ -1,0 +1,50 @@
+network:
+  mcc: "001"
+  mnc: "01"
+  short-name: Test
+  long-name: Test
+  encryption: a5 0
+  use-asterisk: true
+
+radio:
+  band: GSM900
+  arfcn: 100
+  nominal-power: 20
+  max-power-red: 20
+  device-type: lime
+  tx-path: BAND2
+  rx-path: LNAW
+
+egprs:
+  apn-name: internet
+  type-support: v4v6 # v4 | v4v6
+  ip-prefix: 172.16.137.0/24
+  ip-ifconfig: 172.16.137.1/24
+
+  ipv6-prefix: 2001:780:44:2100:0:0:0:0/56
+  ipv6-ifconfig: 2001:780:44:2100:0:0:0:0/56
+
+  # for dns server settings see ./configs/dnsmasq/apn0.conf 
+  dns0: 172.16.137.1
+  dns1: 172.16.137.1
+
+  dns0-v6: 2001:780:44:2100:0:0:0:0
+  dns1-v6: 2001:780:44:2100:0:0:0:0
+
+subscribers:
+  msisdn-length: 3
+
+# do something when user connected
+interaction:
+  sms:
+    enabled: false
+    sender: Good friend
+    text: hello and welcome to osmocom network!
+  ussd:
+    enabled: false
+    type: 0 # 0|1|2 I don't know the difference
+    text: hello and welcome to osmocom network!
+  call:
+    enabled: true
+    from: 0 # any non-numeric string results on "hidden" caller-id
+    voice-file: /sounds/tt-monkeys # filename without path means default sound library from /usr/share/asterisk/sounds/

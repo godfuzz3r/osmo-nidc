@@ -1,0 +1,57 @@
+services:
+  osmo:
+    build: ./docker/osmocom/
+    sysctls:
+      - net.ipv4.ip_forward=1
+    privileged: true
+    cap_add:
+      - NET_ADMIN # Required for iptables rules
+      - SYS_NICE
+    devices:
+      - "/dev/bus"
+    volumes:
+      - ./configs/:/configs/
+      - ./vol/hlr/:/hlr_vol/
+      - ./vol/asterisk_outgoing/:/var/spool/asterisk/outgoing/
+      - ./vol/asterisk_sounds/:/sounds/
+    ports:
+      - 127.0.0.1:2775:2775
+      - 127.0.0.1:12345:12345
+      - 127.0.0.1:4255:4255
+      - 127.0.0.1:4245:4245
+      - 127.0.0.1:4258:4258
+      - 127.0.0.1:4254:4254
+    networks:
+      osmocom_net:
+        ipv4_address: 172.16.80.10
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+      nice:
+        soft: 0
+        hard: 0
+      memlock:
+        soft: -1
+        hard: -1
+    restart: "no"
+  interaction:
+    build: ./docker/interaction/
+    networks:
+      osmocom_net:
+        ipv4_address: 172.16.80.11
+    environment:
+      - DOCKER_ENV=true
+    ports:
+      - 127.0.0.1:8081:8081
+    volumes:
+      - ./configs:/configs/
+      - ./vol/asterisk_outgoing/:/asterisk_outgoing/
+    restart: "no"
+
+networks:
+  osmocom_net: 
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.80.0/24

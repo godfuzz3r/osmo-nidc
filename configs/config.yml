@@ -7,13 +7,16 @@ network:
   use-asterisk: true
 
 radio:
-  band: GSM900
+  band: GSM900        # GSM900 / DCS1800
   arfcn: 100
   nominal-power: 20
   max-power-red: 20
-  device-type: lime
-  tx-path: BAND2
-  rx-path: LNAW
+  device-type: lime   # lime / uhd
+  tx-path: BAND2      # BAND2 for lime and TX/RX for b210 works good
+  rx-path: LNAW       # LNAW for lime and TX/RX for b210 works good
+
+  # uhd only
+  clock-ref: external
 
 egprs:
   apn-name: internet

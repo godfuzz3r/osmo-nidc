@@ -27,9 +27,10 @@ if [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "lime" ]]; then
     sed "s@#tx-path#@$(yq -rM '.radio."tx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-lms.cfg
     sed "s@#rx-path#@$(yq -rM '.radio."rx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-lms.cfg
 elif [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "uhd" ]]; then
-    # TODO do usrp configuration
+    cp /configs/uhd_images/*.bin /usr/share/uhd/images
     sed "s@#tx-path#@$(yq -rM '.radio."tx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
     sed "s@#rx-path#@$(yq -rM '.radio."rx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
+    sed "s@#clock-ref#@$(yq -rM '.radio."clock-ref"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
 fi
 
 sed "s@#apn-name#@$(yq -rM '.egprs."apn-name"' /configs/config.yml)@g" -i /etc/osmocom/osmo-ggsn.cfg
@@ -68,7 +69,6 @@ fi
 if [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "lime" ]]; then
     osmo-trx-lms -C /etc/osmocom/osmo-trx-lms.cfg &
 elif [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "uhd" ]]; then
-    # TODO do usrp configuration
     osmo-trx-uhd -C /etc/osmocom/osmo-trx-uhd.cfg &
 fi
 

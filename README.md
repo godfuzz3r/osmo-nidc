@@ -11,7 +11,7 @@ common feautures:
 
 ## limesdr configuration
 
-In `./config/config.yml` set values in `radio` sections:
+In `./config/config.yml` set values in `radio` section:
 ```yml
 ...
 radio:
@@ -25,7 +25,7 @@ BAND2 and LNAW are work on LimeSDR USB and LimeSDR Mini
 
 ## usrp b200/b210 configuration
 
-In `./configs/config.yml` set values in `radio` sections:
+In `./configs/config.yml` set values in `radio` section:
 ```yml
 ...
 radio:
@@ -41,7 +41,7 @@ TX/RX and TX/RX should work, but need testing.
 
 Place the custom firmware in `./configs/uhd_images/` and give it an appropriate name, such as usrp_b210_fpga.bin. It will be automatically placed in the `/usr/share/uhd/images/` folder inside the osmocom container. It's useful for devices such as USRP B210 LibreSDR clones.
 
-In `./configs/config.yml` set values in `radio` sections:
+In `./configs/config.yml` set values in `radio` section:
 ```yml
 ...
 radio:

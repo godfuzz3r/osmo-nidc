@@ -11,17 +11,47 @@ common feautures:
 
 ## limesdr configuration
 
-In `./config/config.yml` set `device-type` to `lime`, set appropriate `tx-path` and `rx-path`. BAND2 and LNAW are work on LimeSDR USB and LimeSDR Mini
+In `./config/config.yml` set values in `radio` sections:
+```yml
+...
+radio:
+  ...
+  device-type: lime
+  tx-path: BAND2
+  rx-path: LNAW
+  ...
+```
+BAND2 and LNAW are work on LimeSDR USB and LimeSDR Mini
 
 ## usrp b200/b210 configuration
 
-In `./config/config.yml` set `device-type` to `uhd`, set appropriate `tx-path` and `rx-path`. TX/RX and TX/RX should work, but need testing.
+In `./config/config.yml` set values in `radio` sections:
+```yml
+...
+radio:
+  ...
+  device-type: uhd
+  tx-path: TX/RX
+  rx-path: TX/RX
+  ...
+```
+TX/RX and TX/RX should work, but need testing.
 
 ## usrp b200/b210 clones configuration
 
-Place the custom firmware in `./config/uhd_images/` and give it an appropriate name, such as usrp_b210_fpga.bin. It will be automatically placed in the `/usr/share/uhd/images/` folder inside the osmocom container.
+Place the custom firmware in `./config/uhd_images/` and give it an appropriate name, such as usrp_b210_fpga.bin. It will be automatically placed in the `/usr/share/uhd/images/` folder inside the osmocom container. It's useful for devices such as USRP B210 LibreSDR clones.
 
-In `./config/config.yml` set `device-type` to `uhd`, set `tx-path` and `rx-path` accordingly. TX/RX and TX/RX are work on libresdr b220 mini.
+In `./config/config.yml` set values in `radio` sections:
+```yml
+...
+radio:
+  ...
+  device-type: uhd
+  tx-path: TX/RX
+  rx-path: TX/RX
+  ...
+```
+TX/RX and TX/RX are work on LibreSDR B220 mini (XC7A100T+AD9361).
 
 ## gprs
 
@@ -37,3 +67,7 @@ You can also check the traffic on the apn0 interface with `./helpers/wireshark.s
 
 - if MS leaves the network without detaching IMSI, it will be "active" for up to 8 minutes. This is because the minimum value for T3212 timer (location update) is 6 minutes, and MSC requires some time gap between T3212 value in BSC and MSC. Without gap, MSC may expire active subscribers.
 - IPv6 routing not configured
+
+## todo
+- silent call/paging interaction
+- setup default values if some fields in `./configs/config.yml` does not exists (for now deleting field from config.yml would cause crash)

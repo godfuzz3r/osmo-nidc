@@ -1,3 +1,5 @@
-All .bin files from here would be placed at /usr/share/uhd/images/ inside osmocom container
+## custom uhd firmware
 
-The example usage is custom bin files for devices such as LibreSDR B210/B220, which would be automatically uploaded into fpga when would started osmo-trx-uhd
+It's most commonly for USRP B200/B210 clones which uses different FPGA's. Place the custom firmware in ./configs/uhd_images/ and give it an appropriate name, such as usrp_b210_fpga.bin. It will be automatically placed in the /usr/share/uhd/images/ folder inside the osmocom container.
+
+The example usage is LibreSDR B220 mini (XC7A100T+AD9361) which use cusom fpga firmware.

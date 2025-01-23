@@ -67,6 +67,7 @@ You can also check the traffic on the apn0 interface with `./helpers/wireshark.s
 
 - if MS leaves the network without detaching IMSI, it will be "active" for up to 8 minutes. This is because the minimum value for T3212 timer (location update) is 6 minutes, and MSC requires some time gap between T3212 value in BSC and MSC. Without gap, MSC may expire active subscribers.
 - IPv6 routing not configured
+- sometimes devices may be not properly "passed" to container. Stop container, reconnect device and start container again may help
 
 ## todo
 - silent call/paging interaction

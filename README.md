@@ -33,9 +33,15 @@ radio:
   device-type: uhd
   tx-path: TX/RX
   rx-path: TX/RX
+  clock-ref: external
   ...
 ```
-TX/RX and TX/RX should work, but need testing.
+TX/RX and TX/RX should work, but need testing. You can also set external/internal/gpsdo clock-ref for usrp devices:
+- external - ext 10 mhz ref clock, such as leo godnar/octoclock gpsdo
+- internal - default usrp's clock
+- gpsdo    - internal gpsdo that maunted in usrp board (if any)
+
+Feel free to check offisial osmo-trx-uhd documentation, 1.10.4 clock-ref: https://ftp.osmocom.org/docs/osmo-trx/master/osmotrx-uhd-vty-reference.pdf
 
 ## usrp b200/b210 clones configuration
 
@@ -49,9 +55,12 @@ radio:
   device-type: uhd
   tx-path: TX/RX
   rx-path: TX/RX
+  clock-ref: external
   ...
 ```
-TX/RX and TX/RX are work on LibreSDR B220 mini (XC7A100T+AD9361).
+TX/RX and TX/RX are work on LibreSDR B220 mini (XC7A100T+AD9361). You can also set external/internal/gpsdo clock-ref for such devices:
+- external - ext 10 mhz ref clock. Tested with leo bodnar gpsdo
+- internal - default onboard clock, in my testbed it was too poor to get gsm work properly
 
 ## gprs
 

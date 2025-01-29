@@ -21,7 +21,7 @@ radio:
   rx-path: LNAW
   ...
 ```
-BAND2 and LNAW are work on LimeSDR USB and LimeSDR Mini
+BAND2 and LNAW do work on LimeSDR USB and LimeSDR Mini
 
 ## usrp b200/b210 configuration
 
@@ -58,7 +58,7 @@ radio:
   clock-ref: external
   ...
 ```
-TX/RX and TX/RX are work on LibreSDR B220 mini (XC7A100T+AD9361). You can also set external/internal/gpsdo clock-ref for such devices:
+TX/RX and TX/RX do work on LibreSDR B220 mini (XC7A100T+AD9361). You can also set external/internal/gpsdo clock-ref for such devices:
 - external - ext 10 mhz ref clock. Tested with leo bodnar gpsdo
 - internal - default onboard clock, in my testbed it was too poor to get gsm work properly
 

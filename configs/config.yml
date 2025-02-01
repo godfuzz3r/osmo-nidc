@@ -19,8 +19,9 @@ radio:
   clock-ref: external
 
 egprs:
+  routing-enabled: true       # allow route traffic to the internet
   apn-name: internet
-  type-support: v4v6 # v4 | v4v6
+  type-support: v4v6          # v4 | v4v6
   ip-prefix: 172.16.137.0/24
   ip-ifconfig: 172.16.137.1/24
 

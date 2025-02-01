@@ -66,11 +66,52 @@ TX/RX and TX/RX do work on LibreSDR B220 mini (XC7A100T+AD9361). You can also se
 
 DNS confirugration for default apn is in `./configs/dnsmasq/apn0.conf`
 
-By default it resolves all domain names to localhost, since high mobile network traffic causes network degradation.
-
 You can check who is currently using gprs with `./helpers/show-pdp.sh` or `./helpers/mon.sh`
 
-You can also check the traffic on the apn0 interface with `./helpers/wireshark.sh`
+You can also check the traffic on the apn0 interface with `./helpers/wireshark.sh`. This script will forward tcpdump output from container to wireshark.
+
+### gprs network slow/not work
+
+By default android/ios devices send large amount of traffic, which results in network degradation. You can work around this behavior by responding to any dns request with localhost. Just uncomment rules in `./configs/dnsmasq/apn0.conf`:
+```
+address=/#/127.0.0.1
+address=/#/::1
+```
+
+Below are examples of ping timings with default DNS settings and DNS that responds with localhost to everything.
+
+Default dns configuration, all mobile traffic goes through egprs:
+![alt text](img/image-1.png)
+
+Dns config resolves everything to localhost:
+![alt text](img/image-2.png)
+
+You can also enable/disable routing mobile traffic to the internet with `routing-enabled: true/false` in `./configs/config.yml` file:
+```yaml
+...
+egprs:
+  routing-enabled: true
+  ...
+```
+This option will or will not setup iptables routing inside docker container.
+
+## helpers
+
+Here is bunch of scripts to analyze UE's behaviour or to interact with the network.
+
+wireshark.sh - sniff on apn0 interface and show it in wireshark
+
+send-*.sh - do manual interaction
+
+show-pdp.sh - show current egprs usage
+
+show-subscribers-msc.sh - show subscribers on msc
+
+show-subscribers-hlr.sh - show subscribers on hlr
+
+mon.sh - show currently online subscribers in table
+
+![alt text](img/image-3.png)
 
 ## problems
 

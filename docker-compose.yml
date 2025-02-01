@@ -14,13 +14,6 @@ services:
       - ./vol/hlr/:/hlr_vol/
       - ./vol/asterisk_outgoing/:/var/spool/asterisk/outgoing/
       - ./vol/asterisk_sounds/:/sounds/
-    ports:
-      - 127.0.0.1:2775:2775
-      - 127.0.0.1:12345:12345
-      - 127.0.0.1:4255:4255
-      - 127.0.0.1:4245:4245
-      - 127.0.0.1:4258:4258
-      - 127.0.0.1:4254:4254
     networks:
       osmocom_net:
         ipv4_address: 172.16.80.10

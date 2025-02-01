@@ -92,7 +92,7 @@ def get_active():
         out = f"id\tmsisdn\timsi\t\timei\t\t| {'apn':<{apn_max_len}}\t{'UL':<{max_ul_len}}\t{'DL':<{max_dl_len}}\t{'IPv4':<{ipv4_ul_len}}\t{'IPv6':<{ipv6_dl_len}}\n"
         for sub in active:
             out += f"{sub['id']}\t{sub['msisdn']}\t{sub['imsi']}\t{sub['imei']}\t| "
-            out += f"{sub['apn']:^{apn_max_len}}\t{sub['ul']}\t{sub['dl']}\t{sub['ipv4']}\t{sub['ipv6']}\n"
+            out += f"{sub['apn']:<{apn_max_len}}\t{sub['ul']}\t{sub['dl']}\t{sub['ipv4']}\t{sub['ipv6']}\n"
         return out
     return json.dumps(active)
 

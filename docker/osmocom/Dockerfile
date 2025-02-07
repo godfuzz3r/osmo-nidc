@@ -7,8 +7,7 @@ RUN apt-get update && \
     apt install -y  wget \
                     iproute2 iptables dnsmasq \
                     tmux telnet tcpdump curl inetutils-ping procps netcat-traditional \
-                    jq python3-argcomplete python3-tomlkit python3-xmltodict python3-yaml \
-                    uhd-host
+                    jq python3-argcomplete python3-tomlkit python3-xmltodict python3-yaml
 
 RUN wget https://ftp.debian.org/debian/pool/main/y/yq/yq_3.4.3-1_all.deb -O /tmp/yq_3.4.3-1_all.deb && \
     dpkg -i /tmp/yq_3.4.3-1_all.deb
@@ -24,8 +23,37 @@ RUN apt update && \
                     osmo-stp osmo-pcu \
                     osmo-sgsn osmo-ggsn \
                     osmo-cbc osmo-cbc-utils \
-                    osmo-sip-connector libsofia-sip-ua-glib-dev asterisk \
+                    osmo-sip-connector libsofia-sip-ua-glib-dev asterisk
+
+# antsdr build deps
+RUN apt install -y  autoconf automake build-essential \
+                    ccache cmake cpufrequtils doxygen ethtool \
+                    g++ git inetutils-tools libboost-all-dev \
+                    libncurses5 libncurses5-dev libusb-1.0-0 \
+                    libusb-1.0-0-dev libusb-dev python3-dev \
+                    python3-mako python3-numpy python3-requests \
+                    python3-scipy python3-setuptools python3-ruamel.yaml \
     && rm -rf /var/lib/apt/lists/*
+
+# antsdr driver
+RUN git clone https://github.com/MicroPhase/antsdr_uhd
+
+WORKDIR /antsdr_uhd/host/
+
+RUN mkdir ./build && \
+    cd ./build && \
+    cmake   -DENABLE_X400=OFF \
+            -DENABLE_N320=OFF \
+            -DENABLE_X300=OFF \
+            -DENABLE_USRP2=OFF \
+            -DENABLE_USRP1=OFF \
+            -DENABLE_N300=OFF \
+            -DENABLE_E320=OFF \
+            -DENABLE_E300=OFF \
+            ../ && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig
 
 RUN uhd_images_downloader
 

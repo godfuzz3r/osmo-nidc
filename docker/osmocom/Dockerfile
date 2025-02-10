@@ -62,7 +62,7 @@ WORKDIR /osmo-trx
 
 RUN autoreconf -i && \
     ./configure --with-uhd && \
-    make -j8 && \
+    make -j$(nproc) && \
     make install && \
     ldconfig
 

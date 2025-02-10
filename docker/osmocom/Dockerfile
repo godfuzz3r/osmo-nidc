@@ -18,15 +18,16 @@ RUN wget https://obs.osmocom.org/projects/osmocom/public_key && \
     echo "deb [signed-by=/etc/apt/trusted.gpg.d/osmocom.asc] $OSMOCOM_REPO/ ./" | tee /etc/apt/sources.list.d/osmocom-latest.list
 
 RUN apt update && \
-    apt install -y  osmo-trx-lms osmo-trx-uhd \
-                    osmo-bts-trx osmo-bsc osmo-msc osmo-hlr \
+    apt install -y  osmo-bts-trx osmo-bsc osmo-msc osmo-hlr \
                     osmo-stp osmo-pcu \
                     osmo-sgsn osmo-ggsn \
                     osmo-cbc osmo-cbc-utils \
                     osmo-sip-connector libsofia-sip-ua-glib-dev asterisk
 
-# antsdr build deps
-RUN apt install -y  autoconf automake build-essential \
+# antsdr and osmo-trx-uhd build deps
+RUN apt install -y --no-install-recommends \
+                    autoconf automake libtool build-essential \
+                    libboost-dev libosmocore-dev fftw3-dev \
                     ccache cmake cpufrequtils doxygen ethtool \
                     g++ git inetutils-tools libboost-all-dev \
                     libncurses5 libncurses5-dev libusb-1.0-0 \
@@ -37,6 +38,8 @@ RUN apt install -y  autoconf automake build-essential \
 
 # antsdr driver
 RUN git clone https://github.com/MicroPhase/antsdr_uhd
+
+RUN git clone https://gitea.osmocom.org/cellular-infrastructure/osmo-trx.git
 
 WORKDIR /antsdr_uhd/host/
 
@@ -55,8 +58,16 @@ RUN mkdir ./build && \
     make install && \
     ldconfig
 
-RUN uhd_images_downloader
+WORKDIR /osmo-trx
+
+RUN autoreconf -i && \
+    ./configure --with-uhd && \
+    make -j8 && \
+    make install && \
+    ldconfig
 
 ENV UHD_IMAGES_DIR=/usr/share/uhd/images/
+
+RUN uhd_images_downloader
 
 ENTRYPOINT ["nice", "-n", "-20", "bash", "/configs/entrypoint.sh"]

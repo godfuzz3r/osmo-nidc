@@ -80,11 +80,11 @@ osmo-bts-trx -c /etc/osmocom/osmo-bts.cfg &
 
 if [[ $(yq -rM '.egprs."routing-enabled"' /configs/config.yml) = "true" ]]; then
     # get output interface name
-    iface=$(ip route show default | awk -F'dev ' '{ print $2 }')
+    iface=$(ip route show default | awk -F'dev ' '{ print $2 }' | awk '{ print $1 }')
 
     iptables -A FORWARD -i apn0 -o $iface -j ACCEPT
     iptables -A FORWARD -i $iface -o apn0 -j ACCEPT
-    iptables -t nat -A POSTROUTING -o $iface -j SNAT --to-source 172.16.80.10
+    iptables -t nat -A POSTROUTING -o $iface -j MASQUERADE
 
     # TODO: ipv6 routing to internet
 fi

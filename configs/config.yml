@@ -8,14 +8,10 @@ network:
 
 radio:
   band: GSM900        # GSM900 / DCS1800
-  arfcn: 100
+  arfcn-0: 50
+  arfcn-1: 54
   nominal-power: 20
   max-power-red: 20
-  device-type: lime   # lime / uhd
-  tx-path: BAND2      # BAND2 for lime and TX/RX for b210 works good
-  rx-path: LNAW       # LNAW for lime and TX/RX for b210 works good
-
-  # uhd only
   clock-ref: external
 
 egprs:

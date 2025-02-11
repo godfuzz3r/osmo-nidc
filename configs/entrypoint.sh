@@ -19,19 +19,13 @@ else
 fi
 
 sed "s@#band#@$(yq -rM '.radio.band' /configs/config.yml)@g" -i /etc/osmocom/osmo-bsc.cfg
-sed "s@#arfcn#@$(yq -rM '.radio.arfcn' /configs/config.yml)@g" -i /etc/osmocom/osmo-bsc.cfg
+sed "s@#arfcn-0#@$(yq -rM '.radio."arfcn-0"' /configs/config.yml)@g" -i /etc/osmocom/osmo-bsc.cfg
+sed "s@#arfcn-1#@$(yq -rM '.radio."arfcn-1"' /configs/config.yml)@g" -i /etc/osmocom/osmo-bsc.cfg
 sed "s@#nominal-power#@$(yq -rM '.radio."nominal-power"' /configs/config.yml)@g" -i /etc/osmocom/osmo-bsc.cfg
 sed "s@#max-power-red#@$(yq -rM '.radio."max-power-red"' /configs/config.yml)@g" -i /etc/osmocom/osmo-bsc.cfg
 
-if [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "lime" ]]; then
-    sed "s@#tx-path#@$(yq -rM '.radio."tx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-lms.cfg
-    sed "s@#rx-path#@$(yq -rM '.radio."rx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-lms.cfg
-elif [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "uhd" ]]; then
-    cp /configs/uhd_images/*.bin /usr/share/uhd/images
-    sed "s@#tx-path#@$(yq -rM '.radio."tx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
-    sed "s@#rx-path#@$(yq -rM '.radio."rx-path"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
-    sed "s@#clock-ref#@$(yq -rM '.radio."clock-ref"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
-fi
+cp /configs/uhd_images/*.bin /usr/share/uhd/images 2>/dev/null
+sed "s@#clock-ref#@$(yq -rM '.radio."clock-ref"' /configs/config.yml)@g" -i /etc/osmocom/osmo-trx-uhd.cfg
 
 sed "s@#apn-name#@$(yq -rM '.egprs."apn-name"' /configs/config.yml)@g" -i /etc/osmocom/osmo-ggsn.cfg
 sed "s@#type-support#@$(yq -rM '.egprs."type-support"' /configs/config.yml)@g" -i /etc/osmocom/osmo-ggsn.cfg
@@ -66,16 +60,12 @@ if [[ $(yq -rM '.network."use-asterisk"' /configs/config.yml) = "true" ]]; then
     asterisk
 fi
 
-if [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "lime" ]]; then
-    osmo-trx-lms -C /etc/osmocom/osmo-trx-lms.cfg &
-elif [[ $(yq -rM '.radio."device-type"' /configs/config.yml) = "uhd" ]]; then
-    osmo-trx-uhd -C /etc/osmocom/osmo-trx-uhd.cfg &
-fi
+
+osmo-trx-uhd -C /etc/osmocom/osmo-trx-uhd.cfg &
 
 # need wait before trx is initialized, else osmo-bts will crash
 sleep 5
 osmo-bts-trx -c /etc/osmocom/osmo-bts.cfg &
-
 
 
 if [[ $(yq -rM '.egprs."routing-enabled"' /configs/config.yml) = "true" ]]; then

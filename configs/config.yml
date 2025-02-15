@@ -11,9 +11,9 @@ radio:
   arfcn: 100
   nominal-power: 20
   max-power-red: 20
-  device-type: lime   # lime / uhd
-  tx-path: BAND2      # BAND2 for lime and TX/RX for b210 works good
-  rx-path: LNAW       # LNAW for lime and TX/RX for b210 works good
+  device-type: uhd 
+  tx-path: TX/RX
+  rx-path: TX/RX
 
   # uhd only
   clock-ref: external

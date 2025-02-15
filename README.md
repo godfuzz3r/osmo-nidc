@@ -39,7 +39,7 @@ radio:
 TX/RX and TX/RX should work, but need testing. You can also set external/internal/gpsdo clock-ref for usrp devices:
 - external - ext 10 mhz ref clock, such as leo godnar/octoclock gpsdo
 - internal - default usrp's clock
-- gpsdo    - internal gpsdo that maunted in usrp board (if any)
+- gpsdo    - internal gpsdo that mounted in usrp board (if any)
 
 Feel free to check offisial osmo-trx-uhd documentation, 1.10.4 clock-ref: https://ftp.osmocom.org/docs/osmo-trx/master/osmotrx-uhd-vty-reference.pdf
 

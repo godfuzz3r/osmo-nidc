@@ -66,3 +66,4 @@ mon.sh - show currently online subscribers in table
 ## todo
 - silent call/paging interaction
 - setup default values if some fields in `./configs/config.yml` does not exists (for now deleting field from config.yml would cause crash)
+- test/fix egprs with network_mode=host on antsdr_e200 branch

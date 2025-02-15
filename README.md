@@ -62,6 +62,14 @@ TX/RX and TX/RX do work on LibreSDR B220 mini (XC7A100T+AD9361). You can also se
 - external - ext 10 mhz ref clock. Tested with leo bodnar gpsdo
 - internal - default onboard clock, in my testbed it was too poor to get gsm work properly
 
+## antsdr e200
+
+This is not fully tested, but seems that network starts successfully, see https://github.com/godfuzz3r/osmo-nidc/issues/1
+
+Switch to antsdr_e200 branch and rebuild containers with `docker compose build`.
+
+In this branch uhd driver and osmo-trx compiled from source to get it work with antsdr hardware.
+
 ## gprs
 
 DNS confirugration for default apn is in `./configs/dnsmasq/apn0.conf`
@@ -122,3 +130,4 @@ mon.sh - show currently online subscribers in table
 ## todo
 - silent call/paging interaction
 - setup default values if some fields in `./configs/config.yml` does not exists (for now deleting field from config.yml would cause crash)
+- test/fix egprs with network_mode=host on antsdr_e200 branch

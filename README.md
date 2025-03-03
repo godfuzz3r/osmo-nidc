@@ -39,7 +39,7 @@ radio:
 TX/RX and TX/RX should work, but need testing. You can also set external/internal/gpsdo clock-ref for usrp devices:
 - external - ext 10 mhz ref clock, such as leo godnar/octoclock gpsdo
 - internal - default usrp's clock
-- gpsdo    - internal gpsdo that maunted in usrp board (if any)
+- gpsdo    - internal gpsdo that mounted in usrp board (if any)
 
 Feel free to check offisial osmo-trx-uhd documentation, 1.10.4 clock-ref: https://ftp.osmocom.org/docs/osmo-trx/master/osmotrx-uhd-vty-reference.pdf
 
@@ -61,6 +61,14 @@ radio:
 TX/RX and TX/RX do work on LibreSDR B220 mini (XC7A100T+AD9361). You can also set external/internal/gpsdo clock-ref for such devices:
 - external - ext 10 mhz ref clock. Tested with leo bodnar gpsdo
 - internal - default onboard clock, in my testbed it was too poor to get gsm work properly
+
+## antsdr e200
+
+This is not fully tested, but seems that network starts successfully, see https://github.com/godfuzz3r/osmo-nidc/issues/1
+
+Switch to antsdr_e200 branch and rebuild containers with `docker compose build`.
+
+In this branch uhd driver and osmo-trx compiled from source to get it work with antsdr hardware.
 
 ## gprs
 
@@ -122,3 +130,4 @@ mon.sh - show currently online subscribers in table
 ## todo
 - silent call/paging interaction
 - setup default values if some fields in `./configs/config.yml` does not exists (for now deleting field from config.yml would cause crash)
+- test/fix egprs with network_mode=host on antsdr_e200 branch

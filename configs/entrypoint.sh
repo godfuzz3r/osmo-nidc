@@ -62,6 +62,7 @@ osmo-cbc -c /etc/osmocom/osmo-cbc.cfg &
 
 if [[ $(yq -rM '.network."use-asterisk"' /configs/config.yml) = "true" ]]; then
     cp /configs/asterisk/sip.conf /etc/asterisk/sip.conf
+    cp /configs/asterisk/extensions.conf /etc/asterisk/extensions.conf
     osmo-sip-connector -c /etc/osmocom/osmo-sip-connector.cfg &
     asterisk
 fi

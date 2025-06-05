@@ -8,4 +8,4 @@ if [ "$#" -ne 3 ]; then
     exit
 fi
 
-curl -v http://127.0.0.1:8081/sms --json "{\"source\": \"$1\", \"dest\": \"$2\", \"text\": \"$3\"}"
+curl -v http://127.0.0.1:8081/sms --header "Content-Type: application/json" --request POST --data "{\"source\": \"$1\", \"dest\": \"$2\", \"text\": \"$3\"}"

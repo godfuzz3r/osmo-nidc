@@ -9,4 +9,4 @@ if [ "$#" -ne 3 ]; then
 fi
 
 echo "{\"type\": \"$1\", \"dest\": \"$2\", \"text\": \"$3\"}"
-curl -v http://127.0.0.1:8081/ussd --json "{\"type\": \"$1\", \"dest\": \"$2\", \"text\": \"$3\"}"
+curl -v http://127.0.0.1:8081/ussd --header "Content-Type: application/json" --request POST --data "{\"type\": \"$1\", \"dest\": \"$2\", \"text\": \"$3\"}"

@@ -9,4 +9,4 @@ if [ "$#" -ne 3 ]; then
     exit
 fi
 
-curl -v http://127.0.0.1:8081/call --json "{\"caller_extension\": \"$1\", \"dest\": \"$2\", \"voice_file\": \"$3\"}"
+curl -v http://127.0.0.1:8081/call --header "Content-Type: application/json" --request POST --data "{\"caller_extension\": \"$1\", \"dest\": \"$2\", \"voice_file\": \"$3\"}"

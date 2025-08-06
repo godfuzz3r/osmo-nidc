@@ -4,7 +4,7 @@ network:
   short-name: Test
   long-name: Test
   encryption: a5 0
-  use-asterisk: true
+  use-asterisk: false
 
 radio:
   band: GSM900        # GSM900 / DCS1800
@@ -19,7 +19,12 @@ radio:
   clock-ref: external
 
 egprs:
-  routing-enabled: true       # allow route traffic to the internet
+  proxy-enabled: true         # will proxy all traffic through redsocks -> gost socks5 -> http
+  proxy-url: http://127.0.0.1:8080
+
+  routing-enabled: true      # allow route traffic to the internet, ignored if `proxy-enabled` enabled
+  output-interface: wlan0    # out interface for egprs internet
+
   apn-name: internet
   type-support: v4v6          # v4 | v4v6
   ip-prefix: 172.16.137.0/24
@@ -49,6 +54,6 @@ interaction:
     type: 0 # 0|1|2 I don't know the difference
     text: hello and welcome to osmocom network!
   call:
-    enabled: true
+    enabled: false
     from: 0 # any non-numeric string results on "hidden" caller-id
     voice-file: /sounds/tt-monkeys # filename without path means default sound library from /usr/share/asterisk/sounds/

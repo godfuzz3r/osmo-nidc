@@ -31,4 +31,10 @@ RUN uhd_images_downloader
 
 ENV UHD_IMAGES_DIR=/usr/share/uhd/images/
 
+RUN wget https://github.com/ginuerzh/gost/releases/download/v2.12.0/gost_2.12.0_linux_amd64.tar.gz && \
+    tar -zxvf gost_2.12.0_linux_amd64.tar.gz gost && \
+    rm gost_2.12.0_linux_amd64.tar.gz
+
+RUN apt update && apt install -y redsocks && rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT ["nice", "-n", "-20", "bash", "/configs/entrypoint.sh"]

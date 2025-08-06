@@ -1,5 +1,5 @@
 services:
-  osmo:
+  osmo-antsdr-e200:
     build: ./docker/osmocom/
     privileged: true
     cap_add:

@@ -1,9 +1,12 @@
 services:
   osmo-antsdr-e200:
     build: ./docker/osmocom/
+    image: osmo-nidc
+    container_name: osmo-nidc-pentools
     privileged: true
     cap_add:
       - NET_ADMIN # Required for iptables rules
+      - NET_RAW
       - SYS_NICE
     devices:
       - "/dev/bus"
@@ -26,10 +29,11 @@ services:
     restart: "no"
   interaction:
     build: ./docker/interaction/
+    image: osmo-nidc-interaction
+    container_name: osmo-nidc-interaction
     network_mode: "host"
     environment:
-      - DOCKER_ENV=true
-      - OSMOCOM_HOST=127.0.0.1
+      - NIDC_HOST=127.0.0.1
     volumes:
       - ./configs:/configs/
       - ./vol/asterisk_outgoing/:/asterisk_outgoing/

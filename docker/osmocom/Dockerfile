@@ -9,8 +9,8 @@ RUN apt-get update && \
                     tmux telnet tcpdump curl inetutils-ping procps netcat-traditional \
                     jq python3-argcomplete python3-tomlkit python3-xmltodict python3-yaml
 
-RUN wget https://ftp.debian.org/debian/pool/main/y/yq/yq_3.4.3-1_all.deb -O /tmp/yq_3.4.3-1_all.deb && \
-    dpkg -i /tmp/yq_3.4.3-1_all.deb
+RUN wget https://ftp.debian.org/debian/pool/main/y/yq/yq_3.4.3-2_all.deb -O /tmp/yq_3.4.3-2_all.deb && \
+    dpkg -i /tmp/yq_3.4.3-2_all.deb
 
 RUN wget https://obs.osmocom.org/projects/osmocom/public_key && \
     mv public_key /etc/apt/trusted.gpg.d/osmocom.asc && \

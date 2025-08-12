@@ -13,7 +13,7 @@ logging.basicConfig(
     level=logging.DEBUG, format="%(levelname)s %(filename)s:%(lineno)d %(message)s"
 )
 
-host = os.getenv("NIDC_HOST") if not os.getenv("NIDC_HOST") else "127.0.0.1"
+host = os.getenv("NIDC_HOST") if os.getenv("NIDC_HOST") else "127.0.0.1"
 msc_ctrl_port = 4255
 msc_vty_port = 4254
 sgsn_vty_port = 4245

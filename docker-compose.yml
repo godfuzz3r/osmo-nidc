@@ -1,7 +1,7 @@
 services:
   osmo-pentools:
     build: ./docker/osmocom/
-    image: osmo-nidc
+    image: osmo-nidc-pentools
     container_name: osmo-nidc-pentools
     privileged: true
     cap_add:

@@ -38,7 +38,7 @@ services:
       osmocom_net:
         ipv4_address: 172.16.80.11
     environment:
-      - DOCKER_ENV=true
+      - NIDC_HOST=172.16.80.10
     ports:
       - 127.0.0.1:8081:8081
     volumes:

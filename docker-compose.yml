@@ -1,8 +1,8 @@
 services:
   osmo-antsdr-e200:
     build: ./docker/osmocom/
-    image: osmo-nidc
-    container_name: osmo-nidc-pentools
+    image: osmo-nidc-antsdr
+    container_name: osmo-nidc-antsdr
     privileged: true
     cap_add:
       - NET_ADMIN # Required for iptables rules

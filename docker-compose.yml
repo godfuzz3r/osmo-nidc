@@ -1,5 +1,5 @@
 services:
-  osmo-antsdr-e200:
+  osmo-antsdr:
     build: ./docker/osmocom/
     image: osmo-nidc-antsdr
     container_name: osmo-nidc-antsdr

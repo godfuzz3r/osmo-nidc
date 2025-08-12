@@ -1,6 +1,7 @@
 # osmocom network in docker container
 
-devuce pentest oriented branch:
+for main description and setup guide please read origin/main README.md: https://github.com/godfuzz3r/osmo-nidc/blob/main/README.md
+security-assessment oriented branch:
 - network_mode=host
 - http-proxying (invisible for devices)
 

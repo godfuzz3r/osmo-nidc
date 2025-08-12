@@ -33,6 +33,7 @@ services:
     container_name: osmo-nidc-interaction
     network_mode: "host"
     environment:
+      - DOCKER_ENV=true
       - NIDC_HOST=127.0.0.1
     volumes:
       - ./configs:/configs/

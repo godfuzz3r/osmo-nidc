@@ -127,7 +127,18 @@ mon.sh - show currently online subscribers in table
 - IPv6 routing not configured
 - sometimes devices may be not properly "passed" to container. Stop container, reconnect device and start container again may help
 
+## troubleshooting
+
+#### I have `Error reading from server - read (104: Connection reset by peer)` error when building containers
+
+- probably network/firewall issues, restart building process may help
+
+#### my device not passed to the container/got error `Permission denied` on device
+
+- sometimes devices may be not properly "passed" to container. Stop container, reconnect device and start container again may help. (I actually don't know how to solve this problem. If now how to solve this - don't hesitate to create pull requests!)
+
+### 
+
 ## todo
 - silent call/paging interaction
-- setup default values if some fields in `./configs/config.yml` does not exists (for now deleting field from config.yml would cause crash)
-- test/fix egprs with network_mode=host on antsdr_e200 branch
+- setup default values if some fields in `./configs/config.yml` does not exists (for now deleting field from config.yml will cause crash)

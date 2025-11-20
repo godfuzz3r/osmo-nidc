@@ -19,8 +19,6 @@ egprs:
 this will pass all traffic from `apn0` interface through chain redsocks -> gost socks5 -> your proxy (e.g burp suite), proxy-url may be any kind of proxy supported by gost (see https://github.com/ginuerzh/gost/blob/master/README_en.md)
 
 this option will disable routing setup since it is not required
-<<<<<<< HEAD
-
 
 ## troubleshooting
 
@@ -36,4 +34,3 @@ this option will disable routing setup since it is not required
 
 - probably old docker version. Try update docker or add interface outside of container manually (before starting container): `sudo ip tuntap add dev apn0 mode tun`
 =======
->>>>>>> 16d8dd943f08aeeabd5cc32444a98220eeaf7238

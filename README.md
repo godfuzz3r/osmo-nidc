@@ -33,4 +33,3 @@ this option will disable routing setup since it is not required
 #### apn0 interface don't appear at start
 
 - probably old docker version. Try update docker or add interface outside of container manually (before starting container): `sudo ip tuntap add dev apn0 mode tun`
-=======

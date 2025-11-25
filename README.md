@@ -9,6 +9,24 @@ common feautures:
 - egprs with routing
 - active users monitoring and other useful scripts (see `./helpers`)
 
+## git branches description
+
+### main
+Normal setup, egprs network isolated inside `osmo` container
+
+### [pentest_tooling](https://github.com/godfuzz3r/osmo-nidc/tree/pentest_tooling)
+Security assesment for gprs-devices
+- network_mode=host
+- insisibly proxy device's requests to your http proxy
+
+### [antsdr_e200](https://github.com/godfuzz3r/osmo-nidc/tree/antsdr_e200)
+
+Test branch to support antsdr devices with ethernet connection
+
+#### [b210_dual_bts](https://github.com/godfuzz3r/osmo-nidc/tree/b210_dual_bts)
+
+Poc for dual bts setup
+
 ## limesdr configuration
 
 In `./config/config.yml` set values in `radio` section:
